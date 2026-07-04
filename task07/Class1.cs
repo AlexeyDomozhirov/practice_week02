@@ -36,11 +36,23 @@ public class SampleClass
     public int Number { get; }
 }
 
-static class ReflectionHelper
+public static class ReflectionHelper
 {
-    static void PrintTypeInfo(Type type)
+    public static void PrintTypeInfo(Type type)
     {
-	if(type == null) return;
+        if (type == null) return;
+
+        Console.WriteLine($"Тип: {type.FullName}");
+
+        var attributes = Attribute.GetCustomAttributes(type);
+        if (attributes.Length > 0)
+        {
+            Console.WriteLine("Атрибуты класса:");
+            foreach (var attr in attributes)
+            {
+                Console.WriteLine($"  {attr.GetType().FullName}");
+            }
+        }
 
         if (Attribute.GetCustomAttribute(type, typeof(DisplayNameAttribute)) is DisplayNameAttribute classDisplay)
         {
@@ -60,7 +72,7 @@ static class ReflectionHelper
                 ? $" ({pDisplay.DisplayName})" 
                 : string.Empty;
             
-            Console.WriteLine($"- {prop.Name} {propDisplay}");
+            Console.WriteLine($"- {prop.Name}{propDisplay}");
         }
 
         Console.WriteLine("\n--- Методы ---");
@@ -73,8 +85,43 @@ static class ReflectionHelper
                 ? $" ({mDisplay.DisplayName})" 
                 : string.Empty;
 
-            Console.WriteLine($"- {method.Name} {methodDisplay}");
+            Console.Write($"- {method.Name}{methodDisplay}");
+
+            var parameters = method.GetParameters();
+            if (parameters.Length > 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("  Параметры:");
+                foreach (var param in parameters)
+                {
+                    Console.WriteLine($"    {param.ParameterType.Name} {param.Name}");
+                }
+            }
+            else
+            {
+                Console.WriteLine(" (без параметров)");
+            }
+        }
+
+        Console.WriteLine("\n--- Конструкторы ---");
+        var constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+        foreach (var ctor in constructors)
+        {
+            Console.Write($"- {ctor.Name}");
+            var parameters = ctor.GetParameters();
+            if (parameters.Length > 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("  Параметры:");
+                foreach (var param in parameters)
+                {
+                    Console.WriteLine($"    {param.ParameterType.Name} {param.Name}");
+                }
+            }
+            else
+            {
+                Console.WriteLine(" (без параметров)");
+            }
         }
     }
 }
-
