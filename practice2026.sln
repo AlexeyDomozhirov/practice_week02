@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLib", "CommandLib\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystemCommands", "FileSystemCommands\FileSystemCommands.csproj", "{058CFBEA-6BE9-4B3E-BDDC-6440D909AC60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "task08tests", "task08tests\task08tests.csproj", "{F323F11E-779D-42C0-87E5-987F84758971}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{058CFBEA-6BE9-4B3E-BDDC-6440D909AC60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{058CFBEA-6BE9-4B3E-BDDC-6440D909AC60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{058CFBEA-6BE9-4B3E-BDDC-6440D909AC60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F323F11E-779D-42C0-87E5-987F84758971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F323F11E-779D-42C0-87E5-987F84758971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F323F11E-779D-42C0-87E5-987F84758971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F323F11E-779D-42C0-87E5-987F84758971}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
