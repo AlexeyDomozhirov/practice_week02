@@ -1,11 +1,11 @@
 namespace task07;
 
-[VersionAttribute(1, 0), DisplayNameAttribute("Пример класса")]
+[Version(1, 0), DisplayName("Пример класса")]
 public class SampleClass
 {
-    [DisplayNameAttribute("Тестовый метод")]
+    [DisplayName("Тестовый метод")]
     public void TestMethod() { }
 
-    [DisplayNameAttribute("Числовое свойство")]
+    [DisplayName("Числовое свойство")]
     public int Number { get; }
 }
