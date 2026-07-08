@@ -1,7 +1,10 @@
 namespace FileSystemCommands;
 
 using CommandLib;
+using task07;
 
+[DisplayName("Команда вычисления размера директории")]
+[Version(1, 0)]
 public class DirectorySizeCommand : ICommand
 {
     public string DirPath { get; set; }
@@ -11,6 +14,7 @@ public class DirectorySizeCommand : ICommand
         this.DirPath = DirPath;
     }
 
+    [DisplayName("Вычислить размер директории")]
     public void Execute()
     {
         if (!Directory.Exists(DirPath))
