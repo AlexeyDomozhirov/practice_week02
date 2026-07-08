@@ -1,6 +1,7 @@
 namespace task07;
 
-[Version(1, 0), DisplayName("Пример класса")]
+[Version(1, 0)]
+[DisplayName("Пример класса")]
 public class SampleClass
 {
     [DisplayName("Тестовый метод")]
