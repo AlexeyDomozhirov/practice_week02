@@ -41,7 +41,7 @@ public class FileSystemCommandsTests
         var testDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
         Directory.CreateDirectory(testDir);
         var filePath = Path.Combine(testDir, "test.txt");
-        File.WriteAllText(filePath, "Hello"); // 5 байт
+        File.WriteAllText(filePath, "Hello");
 
         var command = new DirectorySizeCommand(testDir);
 
@@ -86,19 +86,14 @@ public class FileSystemCommandsTests
     }
 
     [Fact]
-    public void DirectorySizeCommand_NonexistentDirectory_ShouldOutputNotFound()
+    public void DirectorySizeCommand_NonexistentDirectory_ShouldThrow()
     {
         var nonExistent = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
         var command = new DirectorySizeCommand(nonExistent);
-
-        var consoleOutput = new StringWriter();
-        Console.SetOut(consoleOutput);
-
-        command.Execute();
-
-        Console.SetOut(Console.Out);
-
-        var output = consoleOutput.ToString();
-        Assert.Contains("Directory not found", output);
+    
+        var exception = Record.Exception(() => command.Execute());
+        
+        Assert.NotNull(exception);
+        Assert.IsType<DirectoryNotFoundException>(exception);
     }
 }
