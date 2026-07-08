@@ -5,9 +5,9 @@ public class DisplayNameAttribute : Attribute
 {
     public string DisplayName { get; }
     
-    public DisplayNameAttribute(string name)
+    public DisplayNameAttribute(string DisplayName)
     {
-        DisplayName = name;
+        this.DisplayName = DisplayName;
     }
 }
 
