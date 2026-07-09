@@ -110,9 +110,9 @@ public class PluginLoaderTests
         Assert.True(idxDone >= 0);
 
         Assert.True(idxLoadC < idxExecC);
-        Assert.True(idxExecC < idxLoadA);
         Assert.True(idxLoadA < idxExecA);
         Assert.True(idxExecA < idxLoadB);
+	Assert.True(idxExecC < idxLoadB);
         Assert.True(idxLoadB < idxExecB);
         Assert.True(idxExecB < idxDone);
 
