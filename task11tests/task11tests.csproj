@@ -19,8 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CalcConstructor\CalcConstructor.csproj" />
-    <ProjectReference Include="..\ICalculator\ICalculator.csproj" />
+    <ProjectReference Include="..\task11\task11.csproj" />
   </ItemGroup>
 
 </Project>

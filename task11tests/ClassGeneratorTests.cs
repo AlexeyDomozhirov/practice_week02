@@ -1,16 +1,24 @@
 ﻿namespace task11tests;
 
-using CalcConstructor;
-using ICalculator;
 using Xunit;
+using task11;
 
-public class DynamicCalculatorTests
+public class ClassGeneratorTests
 {
-    private readonly ICalc _calculator;
+    private readonly ICalculator _calculator;
 
-    public DynamicCalculatorTests()
+    public ClassGeneratorTests()
     {
-        _calculator = DynamicCalculator.Create();
+        _calculator = ClassGenerator.CreateCalculator();
+    }
+
+    [Fact]
+    public void GeneratedClass_ImplementsICalculator()
+    {
+        ICalculator Calculator = ClassGenerator.CreateCalculator();
+    
+        Assert.NotNull(Calculator);
+        Assert.IsAssignableFrom<ICalculator>(Calculator);
     }
 
     [Fact]

@@ -1,6 +1,6 @@
-﻿namespace ICalculator;
+namespace task11;
 
-public interface ICalc
+public interface ICalculator
 {
     int Add(int a, int b);
     int Minus(int a, int b);
