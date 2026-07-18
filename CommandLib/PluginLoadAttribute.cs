@@ -7,9 +7,9 @@ public sealed class PluginLoadAttribute : Attribute
 {
     public string[] Dependencies { get; }
     public string PluginName { get; }
-    public PluginLoadAttribute(string PluginName, params string[] Dependencies)
+    public PluginLoadAttribute(string pluginName, params string[] dependencies)
     {
-        this.PluginName = PluginName;
-	this.Dependencies = Dependencies == null ? new string[0] : Dependencies;
+        PluginName = pluginName;
+	Dependencies = dependencies == null ? new string[0] : dependencies;
     }
 }
