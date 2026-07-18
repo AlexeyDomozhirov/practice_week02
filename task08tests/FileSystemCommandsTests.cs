@@ -1,6 +1,6 @@
 ﻿namespace task08tests;
-using FileSystemCommands;
 
+using FileSystemCommands;
 using System;
 using System.IO;
 using Xunit;
@@ -12,13 +12,19 @@ public class FileSystemCommandsTests
     {
         var testDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
         Directory.CreateDirectory(testDir);
-        File.WriteAllText(Path.Combine(testDir, "test.txt"), "Hello");
-        var command = new DirectorySizeCommand(testDir);
+        try
+        {
+            File.WriteAllText(Path.Combine(testDir, "test.txt"), "Hello");
+            var command = new DirectorySizeCommand(testDir);
 
-        var exception = Record.Exception(() => command.Execute());
-        Assert.Null(exception);
-
-        Directory.Delete(testDir, true);
+            var exception = Record.Exception(() => command.Execute());
+            Assert.Null(exception);
+        }
+        finally
+        {
+            if (Directory.Exists(testDir))
+                Directory.Delete(testDir, true);
+        }
     }
 
     [Fact]
@@ -26,13 +32,19 @@ public class FileSystemCommandsTests
     {
         var testDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
         Directory.CreateDirectory(testDir);
-        File.WriteAllText(Path.Combine(testDir, "file.txt"), "Text");
-        var command = new FindFilesCommand(testDir, "*.txt");
+        try
+        {
+            File.WriteAllText(Path.Combine(testDir, "file.txt"), "Text");
+            var command = new FindFilesCommand(testDir, "*.txt");
 
-        var exception = Record.Exception(() => command.Execute());
-        Assert.Null(exception);
-
-        Directory.Delete(testDir, true);
+            var exception = Record.Exception(() => command.Execute());
+            Assert.Null(exception);
+        }
+        finally
+        {
+            if (Directory.Exists(testDir))
+                Directory.Delete(testDir, true);
+        }
     }
 
     [Fact]
@@ -43,19 +55,26 @@ public class FileSystemCommandsTests
         var filePath = Path.Combine(testDir, "test.txt");
         File.WriteAllText(filePath, "Hello");
 
-        var command = new DirectorySizeCommand(testDir);
-
+        var originalOut = Console.Out;
         var consoleOutput = new StringWriter();
-        Console.SetOut(consoleOutput);
+        try
+        {
+            Console.SetOut(consoleOutput);
 
-        command.Execute();
+            var command = new DirectorySizeCommand(testDir);
+            command.Execute();
 
-        Console.SetOut(Console.Out);
+            var output = consoleOutput.ToString();
+            Assert.Contains("5 bytes", output);
+        }
+        finally
+        {
+            Console.SetOut(originalOut);
+            consoleOutput.Dispose();
 
-        var output = consoleOutput.ToString();
-        Assert.Contains("5 bytes", output);
-
-        Directory.Delete(testDir, true);
+            if (Directory.Exists(testDir))
+                Directory.Delete(testDir, true);
+        }
     }
 
     [Fact]
@@ -68,21 +87,28 @@ public class FileSystemCommandsTests
         File.WriteAllText(file1, "Text1");
         File.WriteAllText(file2, "Log");
 
-        var command = new FindFilesCommand(testDir, "*.txt");
-
+        var originalOut = Console.Out;
         var consoleOutput = new StringWriter();
-        Console.SetOut(consoleOutput);
+        try
+        {
+            Console.SetOut(consoleOutput);
 
-        command.Execute();
+            var command = new FindFilesCommand(testDir, "*.txt");
+            command.Execute();
 
-        Console.SetOut(Console.Out);
+            var output = consoleOutput.ToString();
+            Assert.Contains("Found 1 files", output);
+            Assert.Contains(file1, output);
+            Assert.DoesNotContain(file2, output);
+        }
+        finally
+        {
+            Console.SetOut(originalOut);
+            consoleOutput.Dispose();
 
-        var output = consoleOutput.ToString();
-        Assert.Contains("Found 1 files", output);
-        Assert.Contains(file1, output);
-        Assert.DoesNotContain(file2, output);
-
-        Directory.Delete(testDir, true);
+            if (Directory.Exists(testDir))
+                Directory.Delete(testDir, true);
+        }
     }
 
     [Fact]
@@ -90,10 +116,13 @@ public class FileSystemCommandsTests
     {
         var nonExistent = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
         var command = new DirectorySizeCommand(nonExistent);
-    
-        var exception = Record.Exception(() => command.Execute());
-        
-        Assert.NotNull(exception);
-        Assert.IsType<DirectoryNotFoundException>(exception);
+
+        try
+        {
+            var exception = Record.Exception(() => command.Execute());
+            Assert.NotNull(exception);
+            Assert.IsType<DirectoryNotFoundException>(exception);
+        }
+        finally{}
     }
 }
