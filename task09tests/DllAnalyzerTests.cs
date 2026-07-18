@@ -48,7 +48,7 @@ public class DllAnalyzerTests
         
         Assert.Contains("- .ctor", output);
         Assert.Contains("Параметры:", output);
-        Assert.Contains("String DirPath", output);
+        Assert.Contains("String dirPath", output);
     }
 
     [Fact]
@@ -65,7 +65,7 @@ public class DllAnalyzerTests
         
         Assert.Contains("- .ctor", output);
         Assert.Contains("Параметры:", output);
-        Assert.Contains("String DirectoryPath", output);
-        Assert.Contains("String SearchPattern", output);
+        Assert.Contains("String directoryPath", output);
+        Assert.Contains("String searchPattern", output);
     }
 }

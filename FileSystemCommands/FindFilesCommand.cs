@@ -10,10 +10,10 @@ public class FindFilesCommand : ICommand
     public string DirPath { get; set; }
     public string SearchPattern { get; set; }
 
-    public FindFilesCommand(string DirectoryPath, string SearchPattern)
+    public FindFilesCommand(string directoryPath, string searchPattern)
     {
-        this.DirPath = DirectoryPath;
-        this.SearchPattern = SearchPattern;
+        DirPath = directoryPath;
+        SearchPattern = searchPattern;
     }
 
     [DisplayName("Выполнить поиск файлов по маске")]
