@@ -6,9 +6,9 @@ public class DirectorySizeCommand : ICommand
 {
     public string DirPath { get; set; }
 
-    public DirectorySizeCommand(string DirPath)
+    public DirectorySizeCommand(string dirPath)
     {
-        this.DirPath = DirPath;
+        DirPath = dirPath;
     }
 
     public void Execute()
