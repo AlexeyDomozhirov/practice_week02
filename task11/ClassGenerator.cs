@@ -64,7 +64,7 @@ public static class ClassGenerator
         object instance;
         try
         {
-            instance = Activator.CreateInstance(calculatorType)!;
+            instance = Activator.CreateInstance(calculatorType);
         }
         catch (Exception ex)
         {
