@@ -6,6 +6,6 @@ public class PluginC : ICommand
 {
     void ICommand.Execute()
     {
-	Console.WriteLine("PluginC executed! depend on PluginA");
+        Console.WriteLine("PluginC executed! depend on PluginA");
     }
 }

@@ -6,6 +6,6 @@ public class PluginB : ICommand
 {
     void ICommand.Execute()
     {
-	Console.WriteLine("PluginB executed!");
+        Console.WriteLine("PluginB executed!");
     }
 }
