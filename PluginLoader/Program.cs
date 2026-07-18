@@ -31,12 +31,6 @@ public static class PluginLoader
             return;
         }
 
-        if (!dllFiles.Any())
-        {
-            Console.WriteLine("Библиотеки не найдены.");
-            return;
-        }
-
         var assemblies = new List<Assembly>();
         foreach (var file in dllFiles)
         {
